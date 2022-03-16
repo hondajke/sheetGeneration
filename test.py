@@ -1,33 +1,50 @@
 import unittest
+from datetime import date
+from main import *
 
 class TestGeneration(unittest.TestCase):
     
     def test_student_class(self):
-        self.assertEqual('Филиппов Петр', fio)
-        self.assertEqual(172544, code)
+        st = Student(172544, 'Филиппов Петр')
+        self.assertEqual('Филиппов Петр', st.fio)
+        self.assertEqual(172544, st.code)
         
     def test_group_class(self):
-        self.assertEqual('М-ФИИТ-21', name)
-        self.assertEqual(2021, year)
-        self.assertEqual(spec, specialization)
+        spec = Specialization("ФИИТ")
+        grp = Group("М-ФИИТ-21", 2021, spec)
+        self.assertEqual('М-ФИИТ-21', grp.name)
+        self.assertEqual(2021, grp.year)
+        self.assertEqual("ФИИТ", grp.specialization.name)
         
     def test_exam_class(self):
-        self.assertEqual(sub, subject)
-        self.assertEqual(date, examDate)
-        self.assertEqual("2021", year)
-        self.assertEqual("Эверстов Владимир Васильевич", lecturer_fio)
+        spec = Specialization('ФИИТ')
+        subj = Subject('Б1', 'Основы программирования', 1, 172, spec)
+        examDate = date(2021,2,12)
+        exam = Exam(subj, examDate, '2021', "Эверстов Владимир Васильевич")
+        self.assertEqual('Основы программирования', exam.subject.name)
+        self.assertEqual(date(2021,2,12), exam.examDate)
+        self.assertEqual("2021", exam.year)
+        self.assertEqual("Эверстов Владимир Васильевич", exam.lecturer_fio)
         
     def test_exampoints_class(self):
-        self.assertEqual(student, student)
-        self.assertEqual(55.5, inPoints)
-        self.assertEqual(30.0, examPoints)
+        st = Student(172544, 'Филиппов Петр')
+        examPo = ExamPoints(st, 55.5, 30.0)
+        self.assertEqual('Филиппов Петр', examPo.student.fio)
+        self.assertEqual(55.5, examPo.inPoints)
+        self.assertEqual(30.0, examPo.examPoints)
         
     def test_subject_class(self):
-        self.assertEqual('Б1.', code)
-        self.assertEqual('Основы программирования', name)
-        self.assertEqual(1, semester)
-        self.assertEqual(172, hours)
-        self.assertEqual(spec, specialization)
+        spec = Specialization("ФИИТ")
+        subj = Subject('Б1', 'Основы программирования', 1, 172, spec)
+        self.assertEqual('Б1', subj.code)
+        self.assertEqual('Основы программирования', subj.name)
+        self.assertEqual(1, subj.semester)
+        self.assertEqual(172, subj.hours)
+        self.assertEqual("ФИИТ", subj.specialization.name)
         
     def test_specialization_class(self):
-        self.assertEqual("ФИИТ", name)
+        spec = Specialization("ФИИТ")
+        self.assertEqual("ФИИТ", spec.name)
+        
+if __name__ == 'main':
+    unittest.main()
