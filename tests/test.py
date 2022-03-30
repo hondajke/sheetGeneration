@@ -1,6 +1,7 @@
 import unittest
 from datetime import date
 from main import *
+from institute import Institute
 
 class TestGeneration(unittest.TestCase):
     
@@ -46,5 +47,6 @@ class TestGeneration(unittest.TestCase):
         spec = Specialization("ФИИТ")
         self.assertEqual("ФИИТ", spec.name)
         
+
 if __name__ == 'main':
     unittest.main()
