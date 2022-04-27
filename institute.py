@@ -114,6 +114,8 @@ class Institute:
     def get_spec(self, name: str):
         if type(name) != str:
             raise Exception("Wrong type")
+        if name == '':
+            raise Exception("Name is null")
         for i in self.specs:
             if i.name == name:
                 return i
@@ -122,12 +124,18 @@ class Institute:
         return self.subjects
     
     def get_student(self, student_code: int):
+        if type(student_code) != int:
+            raise Exception("Wrong type")
         for i in self.students:
             if i.code == student_code:
                 return i
         
-    def get_group(self):
-        return self.groups
+    def get_group(self, name: str):
+        if type(name) != str:
+            raise Exception("Wrong type")
+        for i in self.groups:
+            if i.name == name:
+                return i
 
     def get_exam(self):
         return self.exams
