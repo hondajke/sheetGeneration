@@ -45,13 +45,12 @@ class Group:
         
 @dataclass
 class Exam:
-    group: Group
     subject: Subject
     examDate: date
     year: str
     lecturer_fio: str
     
-    def __init__(self, group: Group, subject: Subject, examDate: date, year: str, lecturer_fio: str):
+    def __init__(self, subject: Subject, examDate: date, year: str, lecturer_fio: str):
         self.group = group
         self.subject = subject
         self.examDate = examDate
@@ -60,15 +59,11 @@ class Exam:
         
 @dataclass
 class ExamPoints:
-    exam: Exam
-    group: Group
     student: Student
     inPoints: float
     examPoints: float
     
-    def __init__(self, exam: Exam, group: Group, student: Student, inPoints: float, examPoints: float):
-        self.exam = exam
-        self.group = group
+    def __init__(self, student: Student, inPoints: float, examPoints: float):
         self.student = student
         self.inPoints = inPoints
         self.examPoints = examPoints
