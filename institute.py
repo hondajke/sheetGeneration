@@ -1,5 +1,6 @@
 from main import *
 from dataclasses import dataclass
+from datetime import date
 
 @dataclass
 class Institute:
@@ -120,8 +121,12 @@ class Institute:
             if i.name == name:
                 return i
     
-    def get_subject(self):
-        return self.subjects
+    def get_subject(self, name: str):
+        if type(name) != str:
+            raise Exception("Wrong type")
+        for i in self.subjects:
+            if i.name == name:
+                return i
     
     def get_student(self, student_code: int):
         if type(student_code) != int:
@@ -137,8 +142,16 @@ class Institute:
             if i.name == name:
                 return i
 
-    def get_exam(self):
-        return self.exams
+    def get_exam(self, group_name: str, subject_name: str, input_date: date):
+        if type(group_name) != str or type(subject_name) != str or type(date) != date:
+            raise Exception("Wrong type")
+        for i in self.exams:
+            if i.group.name == group_name and i.subject.name == subject_name and i.examDate == input_date:
+                return i
     
-    def get_exam_result(self):
-        return self.examPointsList
+    def get_exam_result(self, input_exam: Exam, input_group: Group):
+        if type(input_exam) != Exam or type(input_group) != Group:
+            raise Exception("Wrong type")
+        for i in self.exam_points:
+            if i.exam == input_exam and i.group == input_group:
+                return i
