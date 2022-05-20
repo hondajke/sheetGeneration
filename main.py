@@ -51,7 +51,6 @@ class Exam:
     lecturer_fio: str
     
     def __init__(self, subject: Subject, examDate: date, year: str, lecturer_fio: str):
-        self.group = group
         self.subject = subject
         self.examDate = examDate
         self.year = year
